@@ -2,6 +2,7 @@
 using Xunit;
 using promotionengine.Order;
 using promotionengine.Inventory;
+using promotionengine.Promotion;
 
 namespace promotionengine.tests.Order
 {
@@ -9,10 +10,14 @@ namespace promotionengine.tests.Order
     {
         private readonly IInventoryService _inventoryService;
         private readonly IOrderService _orderService;
+        private readonly IPromotionService _promotionService;
         public OrderTests()
         {
             this._inventoryService = new InventoryService();
-            this._orderService = new OrderService(this._inventoryService);
+            this._promotionService = new PromotionService();
+            this._orderService = new OrderService(this._inventoryService,
+                                                  this._promotionService);
+
         }
 
         [Fact]
@@ -25,7 +30,15 @@ namespace promotionengine.tests.Order
         [InlineData("A", 4)]
         public void AddItemToCart_Test(string id, int qty)
         {
+            this._inventoryService.CreateSKU(id, 10, "");
             Assert.True(this._orderService.AddToCart(id, qty));
+        }
+
+        [Fact]
+        public void CheckIfCartIsEmptyAfterAddToCart_Test()
+        {
+            AddItemToCart_Test("A", 2);
+            Assert.False(this._orderService.IsCartEmpty());
         }
     }
 }

@@ -27,7 +27,9 @@ namespace promotionengine.Order
         }
 
         public string Id { get { return this._id; }  }
-        
+        public int Quantity { get { return this._quantity; } }
+
+
         public int Price { get; set; }          // Member to hold the unit price of item
         public string Currency { get; set; }    // Member to hold the currency of price
         public int Amount { get; set; }         // Member to hold the amount = quantity*price

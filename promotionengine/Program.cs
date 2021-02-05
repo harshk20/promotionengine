@@ -1,5 +1,8 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
+using promotionengine.Inventory;
+using promotionengine.Order;
+using promotionengine.Promotion;
 using promotionengine.Store;
 
 namespace promotionengine
@@ -29,6 +32,10 @@ namespace promotionengine
         {
             var services = new ServiceCollection();
             services.AddSingleton<IStoreService, StoreService>();
+            services.AddScoped<IPromotionService, PromotionService>();
+            services.AddScoped<IInventoryService, InventoryService>();
+            services.AddScoped<IOrderService, OrderService>();
+
 
             _serviceProvider = services.BuildServiceProvider();
         }

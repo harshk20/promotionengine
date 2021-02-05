@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using promotionengine.Inventory;
 
 namespace promotionengine.Order
 {
     public class OrderService : IOrderService
     {
         private readonly ICollection<OrderItem> _cart;
+        private readonly IInventoryService _inventoryService;
 
-        public OrderService()
+        public OrderService (IInventoryService inventoryService)
         {
+            this._inventoryService = inventoryService;
             this._cart = new Collection<OrderItem>();
         }
 
@@ -19,16 +22,23 @@ namespace promotionengine.Order
             try
             {
                 // First we have to check if the Stock item actually exists with this id
+                var sku = this._inventoryService.GetSKUById(id);
+                if (sku == null)
+                    return false;
 
                 OrderItem orderItem;
                 if (!this._cart.Any(oi => oi.Id.Equals(id)))
                 {
                     orderItem = new OrderItem(id, qty);
+                    orderItem.Price = sku.Price;
+                    orderItem.Currency = sku.Currency;
+
                     this._cart.Add(orderItem);
                 }
                 else
                 {
                     orderItem = this._cart.Where(oi => oi.Id.Equals(id)).Single();
+                    orderItem.AddQuantity(qty);
                 }
                 return true;
             }

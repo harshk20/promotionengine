@@ -1,15 +1,18 @@
 ﻿using System;
 using Xunit;
 using promotionengine.Order;
+using promotionengine.Inventory;
 
 namespace promotionengine.tests.Order
 {
     public class OrderTests
     {
+        private readonly IInventoryService _inventoryService;
         private readonly IOrderService _orderService;
         public OrderTests()
         {
-            this._orderService = new OrderService();
+            this._inventoryService = new InventoryService();
+            this._orderService = new OrderService(this._inventoryService);
         }
 
         [Fact]

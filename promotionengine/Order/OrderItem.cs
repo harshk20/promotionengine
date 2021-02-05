@@ -16,6 +16,16 @@ namespace promotionengine.Order
             this._quantity = qty;
         }
 
+        public void AddQuantity (int qty)
+        {
+            this._quantity += qty;
+        }
+
+        public void RemoveQuantity (int qty)
+        {
+            this._quantity -= qty;
+        }
+
         public string Id { get { return this._id; }  }
         
         public int Price { get; set; }          // Member to hold the unit price of item

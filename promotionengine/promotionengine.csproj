@@ -11,5 +11,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Store\" />
+    <Folder Include="Inventory\" />
   </ItemGroup>
 </Project>

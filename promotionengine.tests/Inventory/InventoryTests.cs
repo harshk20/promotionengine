@@ -1,5 +1,6 @@
 ﻿using System;
 using Xunit;
+using promotionengine.Inventory;
 
 namespace promotionengine.tests.Inventory
 {

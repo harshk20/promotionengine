@@ -6,9 +6,9 @@ namespace promotionengine.Inventory
      */
     public class SKU
     {
-        private readonly string _id;          // Member to hold item name
-        private readonly int _price;          // Member to hold item's unit price
-        private readonly string _currency;    // Member to hold the currency of unit price
+        private string _id;          // Member to hold item name
+        private int _price;          // Member to hold item's unit price
+        private string _currency;    // Member to hold the currency of unit price
 
         // Constructor
         public SKU(string id, int price, string currency)

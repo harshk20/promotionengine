@@ -22,5 +22,23 @@ namespace promotionengine.tests.Inventory
             Assert.True(this._inventoryService.CreateSKU(id, price, currency), "SKU " + id + " created");
         }
 
+        [Theory]
+        [InlineData ("A")]
+        public void SKUGetById_BeforeCreating_Test (string id)
+        {
+            var sku = this._inventoryService.GetSKUById(id);
+            Assert.Null(sku);
+        }
+
+        [Theory]
+        [InlineData("A", 10, "$")]
+        public void SKUGetById_AfterCreating_Test(string id, int price, string currency)
+        {
+            SKUCreation_Test(id, price, currency);
+            var sku = this._inventoryService.GetSKUById(id);
+            Assert.NotNull(sku);
+            Assert.True(sku.id.Equals(id));
+        }
+
     }
 }

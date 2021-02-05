@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <Folder Include="Store\" />
+    <Folder Include="Inventory\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\promotionengine\promotionengine.csproj" />

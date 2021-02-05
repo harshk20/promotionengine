@@ -118,9 +118,27 @@ namespace promotionengine.Order
                         // Case buy item1 and item2 for fixed price
                         } else if(promotion.OfferItems.Count > 1 && promotion.OfferType == OfferType.BUY_COMBINED_ITEMS_FOR_FIXED)
                         {
+                            bool isPromotionApplicable = true;
                             foreach(var offerItem in promotion.OfferItems)
                             {
+                                var item = FindById(offerItem.Id);
+                                // We need to check all other items to see if this promotion is still applicable
+                                if (item == null || item.IsOfferApplied || offerItem.MinQuantity > item.Quantity)
+                                    isPromotionApplicable = false;
+                                    
+                            }
 
+                            if (isPromotionApplicable)
+                            {
+                                OrderItem lastItem = orderItem; 
+                                // Mark all Items as OfferApplied
+                                foreach (var offerItem in promotion.OfferItems)
+                                {
+                                    lastItem = FindById(offerItem.Id);
+                                    lastItem.IsOfferApplied = true;
+                                }
+
+                                lastItem.OfferAmount = promotion.FixedPrice;
                             }
                         }
 
@@ -143,7 +161,7 @@ namespace promotionengine.Order
                 foreach (var orderItem in Cart)
                 {
                     CartTotal += orderItem.Amount;
-                    CartOfferTotal += orderItem.OfferAmount;
+                    CartOfferTotal += (orderItem.OfferAmount > 0)? orderItem.OfferAmount : orderItem.Amount;
                 }
 
             }

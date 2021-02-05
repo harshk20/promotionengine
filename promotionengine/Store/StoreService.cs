@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using promotionengine.Inventory;
+using promotionengine.Order;
+using promotionengine.Promotion;
 
 namespace promotionengine.Store
 {
@@ -10,8 +13,18 @@ namespace promotionengine.Store
         private readonly ICollection<Store> _stores;    // member to hold many stores
         private Store _currentStore;                    // member for operating on current store
 
-        public StoreService()
+
+        private readonly IInventoryService _inventoryService;
+        private readonly IPromotionService _promotionService;
+        private readonly IOrderService _orderService;
+
+        public StoreService(IInventoryService inventoryService,
+                            IPromotionService promotionService,
+                            IOrderService orderService)
         {
+            this._inventoryService = inventoryService;
+            this._promotionService = promotionService;
+            this._orderService = orderService;
             this._stores = new Collection<Store>();
         }
 
@@ -43,6 +56,12 @@ namespace promotionengine.Store
                     return false;
 
                 this._currentStore = store;
+
+                this._inventoryService.CreateSKU("A", 10, "$");
+                this._promotionService.CreatePromotion(OfferType.BUY_N_ITEMS_FOR_FIXED, new List<OfferItem> { new OfferItem("A", 2) }, 10);
+                this._orderService.AddToCart("A", 3);
+                var total = this._orderService.Checkout();
+
                 return true;
             }
             catch (Exception ex)

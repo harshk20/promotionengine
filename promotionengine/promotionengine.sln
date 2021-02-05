@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "promotionengine", "promotionengine.csproj", "{6EDBB51E-AF71-4E74-B608-DD4BB3C19341}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "promotionengine.tests", "..\promotionengine.tests\promotionengine.tests.csproj", "{AB7BF82E-66F9-4A8B-835F-6217E862283F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6EDBB51E-AF71-4E74-B608-DD4BB3C19341}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EDBB51E-AF71-4E74-B608-DD4BB3C19341}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EDBB51E-AF71-4E74-B608-DD4BB3C19341}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EDBB51E-AF71-4E74-B608-DD4BB3C19341}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB7BF82E-66F9-4A8B-835F-6217E862283F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB7BF82E-66F9-4A8B-835F-6217E862283F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB7BF82E-66F9-4A8B-835F-6217E862283F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB7BF82E-66F9-4A8B-835F-6217E862283F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -22,6 +22,6 @@ namespace promotionengine.Order
         public string Currency { get; set; }    // Member to hold the currency of price
         public int Amount { get; set; }         // Member to hold the amount = quantity*price
         public int OfferAmount { get; set; }    // Member to hold calculated amount after applying the promotion
-
+        public bool IsOfferApplied { get; set; }
     }
 }

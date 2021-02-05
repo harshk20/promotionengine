@@ -13,5 +13,6 @@
     <Folder Include="Store\" />
     <Folder Include="Inventory\" />
     <Folder Include="Order\" />
+    <Folder Include="Promotion\" />
   </ItemGroup>
 </Project>

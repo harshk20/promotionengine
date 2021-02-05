@@ -22,36 +22,20 @@ namespace promotionengine.tests.Store
             this._storeService = new StoreService(this._inventoryService, this._promotionService, this._orderService);
         }
 
+        
         [Theory]
         [InlineData("Alphabets")]
-        [InlineData("Numbers")]
-        public void StoreCreation_Test(string name)
+        public void OpenStore_Test(string name)
         {
-            Assert.True(_storeService.CreateStore(name), "Store Created with name : " + name);
+            Assert.True(_storeService.OpenStore(name), "System opened up a store with name: " + name);
         }
 
         [Theory]
-        [InlineData("Alphabets")]
-        public void StoreDuplication_Test(string name)
-        {
-            StoreCreation_Test(name);
-            Assert.False(_storeService.CreateStore(name), "Store duplicate with name : " + name);
-
-        }
-
-        [Theory]
-        [InlineData("Alphabets")]
-        public void RunStoreBeforeCreation_Test(string name)
-        {
-            Assert.False(_storeService.RunStore(name), "System didn't find store with name: " + name);
-        }
-
-        [Theory]
-        [InlineData("Alphabets")]
+        [InlineData("")]
+        [InlineData(null)]
         public void RunStoreAfterCreation_Test(string name)
         {
-            StoreCreation_Test(name);
-            Assert.True(_storeService.RunStore(name), "System is running " + name + "store right now");
+            Assert.False(_storeService.OpenStore(name));
         }
 
     }

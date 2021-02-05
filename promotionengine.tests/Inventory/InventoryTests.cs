@@ -13,6 +13,13 @@ namespace promotionengine.tests.Inventory
         }
 
         [Theory]
+        [InlineData("", 0, "")]
+        public void SKUCreation_Empty_Test(string id, int price, string currency)
+        {
+            Assert.True(this._inventoryService.CreateSKU(id, price, currency), "SKU " + id + " created");
+        }
+
+        [Theory]
         [InlineData("A", 20, "$")]
         [InlineData("B", 30, "$")]
         [InlineData("C", 40, "$")]

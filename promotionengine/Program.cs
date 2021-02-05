@@ -18,8 +18,7 @@ namespace promotionengine
 
             // Get the store service and start running the store
             var storeService = _serviceProvider.GetRequiredService<IStoreService>();
-            storeService.CreateStore("Alphabets");
-            storeService.RunStore("Alphabets");
+            storeService.OpenStore("Alphabets");
 
             // Disponse the services if there is anything to dispose
             DisposeServices();

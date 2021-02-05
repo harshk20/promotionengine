@@ -37,7 +37,7 @@ namespace promotionengine.tests.Inventory
             SKUCreation_Test(id, price, currency);
             var sku = this._inventoryService.GetSKUById(id);
             Assert.NotNull(sku);
-            Assert.True(sku.id.Equals(id));
+            Assert.True(sku.Id.Equals(id));
         }
 
     }

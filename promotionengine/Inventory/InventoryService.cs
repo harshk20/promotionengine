@@ -11,7 +11,7 @@ namespace promotionengine.Inventory
 
         public InventoryService()
         {
-            _stockItems = new Collection<SKU>();
+            this._stockItems = new Collection<SKU>();
         }
 
         /**
@@ -19,11 +19,38 @@ namespace promotionengine.Inventory
          */
         public bool CreateSKU(string id, int price, string currency)
         {
-            if (_stockItems.Any(si => si.Id.Equals(id)))
-                return false;
+            try
+            {
+                if (this._stockItems.Any(si => si.Id.Equals(id)))
+                    return false;
 
-            _stockItems.Add(new SKU(id, price, currency));
-            return true;
+                this._stockItems.Add(new SKU(id, price, currency));
+                return true;
+
+            } catch (Exception ex)
+            {
+                _ = ex;
+                return false;
+            }
+        }
+
+        /**
+         * Method to get the SKU via id
+         */
+        public SKU GetSKUById(string id)
+        {
+            try
+            {
+                if (!this._stockItems.Any(si => si.Id.Equals(id)))
+                    return null;
+
+                return this._stockItems.Where(si => si.Id.Equals(id)).Single();
+            }
+            catch (Exception ex)
+            {
+                _ = ex;
+                return null;
+            }
         }
 
         public ICollection<SKU> StockItems { get { return this._stockItems; } }

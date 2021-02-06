@@ -53,6 +53,25 @@ namespace promotionengine.Inventory
             }
         }
 
+        public void GenerateDefaultSKU()
+        {
+
+            CreateSKU("A", 40, "$");
+            CreateSKU("B", 30, "$");
+            CreateSKU("C", 20, "$");
+            CreateSKU("D", 15, "$");
+            CreateSKU("E", 25, "$");
+            CreateSKU("F", 5, "$");
+            CreateSKU("G", 10, "$");
+            CreateSKU("H", 1, "$");
+
+        }
+
+        public ICollection<SKU> GetStockItems()
+        {
+            return this.StockItems;
+        }
+
         public ICollection<SKU> StockItems { get { return this._stockItems; } }
 
     }

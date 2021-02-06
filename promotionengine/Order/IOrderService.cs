@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace promotionengine.Order
 {
     public interface IOrderService
@@ -9,5 +11,6 @@ namespace promotionengine.Order
         public void ComputeAmountWithPromotion();
         public void CalculateTotals();
         public int Checkout();
+        public ICollection<OrderItem> GetCart();
     }
 }

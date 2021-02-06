@@ -31,7 +31,7 @@ namespace promotionengine.Promotion
         }
         public bool IsActive { get; set; }
         public int FixedPrice { get; set; }
-        public OfferType OfferType { get; set; }
+        public OfferType OfferType { get { return this._offerType; } }
         public ICollection<OfferItem> OfferItems { get { return this._offerItems; } }
     }
 }

@@ -30,7 +30,7 @@ namespace promotionengine.Order
             {
                 // First we have to check if the Stock item actually exists with this id
                 var sku = this._inventoryService.GetSKUById(id);
-                if (sku == null)
+                if (sku == null || qty < 0)
                     return false;
 
                 OrderItem orderItem = FindById(id);
@@ -169,6 +169,11 @@ namespace promotionengine.Order
             {
                 _ = ex;
             }
+        }
+
+        public ICollection<OrderItem> GetCart()
+        {
+            return this.Cart;
         }
 
         public ICollection<OrderItem> Cart { get { return this._cart; } }

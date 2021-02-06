@@ -34,11 +34,30 @@ namespace promotionengine.tests.Order
             Assert.True(this._orderService.AddToCart(id, qty));
         }
 
+        [Theory]
+        [InlineData("A", -1)]
+        public void AddItemToCart_Negative_Test(string id, int qty)
+        {
+            this._inventoryService.CreateSKU(id, 10, "");
+            Assert.False(this._orderService.AddToCart(id, qty));
+        }
+
         [Fact]
         public void CheckIfCartIsEmptyAfterAddToCart_Test()
         {
             AddItemToCart_Test("A", 2);
             Assert.False(this._orderService.IsCartEmpty());
         }
+
+        [Theory]
+        [InlineData("A")]
+        public void FindCartItemById_Test(string id)
+        {
+            Assert.Null(this._orderService.FindById(id));
+            AddItemToCart_Test(id, 1);
+            Assert.NotNull(this._orderService.FindById(id));
+        }
+
+
     }
 }

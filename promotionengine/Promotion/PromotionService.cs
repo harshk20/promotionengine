@@ -38,6 +38,16 @@ namespace promotionengine.Promotion
             }
         }
 
+        public void GenerateDefaultPromotion()
+        {
+            CreatePromotion(OfferType.BUY_N_ITEMS_FOR_FIXED, new List<OfferItem> { new OfferItem("A", 3) }, 90);
+            CreatePromotion(OfferType.BUY_N_ITEMS_FOR_FIXED, new List<OfferItem> { new OfferItem("B", 2) }, 60);
+            CreatePromotion(OfferType.BUY_COMBINED_ITEMS_FOR_FIXED,
+                            new List<OfferItem> { new OfferItem("C", 1),
+                                                  new OfferItem("D", 1)}, 50);
+
+        }
+
         public List<Promotion> GetPromotionById(string id)
         {
             try
@@ -52,6 +62,11 @@ namespace promotionengine.Promotion
                 _ = ex;
                 return null;
             }
+        }
+
+        public ICollection<Promotion> GetPromotionOffers()
+        {
+            return this.Promotions;
         }
 
         public bool IsPromotionApplicable(string id, int qty)

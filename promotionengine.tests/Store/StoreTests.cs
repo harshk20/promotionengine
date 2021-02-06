@@ -33,7 +33,7 @@ namespace promotionengine.tests.Store
         [Theory]
         [InlineData("")]
         [InlineData(null)]
-        public void RunStoreAfterCreation_Test(string name)
+        public void OpenStore_EmptyName_Test(string name)
         {
             Assert.False(_storeService.OpenStore(name));
         }

@@ -61,6 +61,7 @@ namespace promotionengine.Order
          */
         public int Checkout()
         {
+            ClearOldOfferAndTotals();
             ComputeAmountWithPromotion();
             CalculateTotals();
 
@@ -119,26 +120,34 @@ namespace promotionengine.Order
                         } else if(promotion.OfferItems.Count > 1 && promotion.OfferType == OfferType.BUY_COMBINED_ITEMS_FOR_FIXED)
                         {
                             bool isPromotionApplicable = true;
-                            foreach(var offerItem in promotion.OfferItems)
+                            int offerMinQty = int.MaxValue;
+                            foreach (var offerItem in promotion.OfferItems)
                             {
                                 var item = FindById(offerItem.Id);
                                 // We need to check all other items to see if this promotion is still applicable
                                 if (item == null || item.IsOfferApplied || offerItem.MinQuantity > item.Quantity)
                                     isPromotionApplicable = false;
-                                    
+
+                                var offerQty = item.Quantity / offerItem.MinQuantity;
+
+                                if (offerMinQty > offerQty)
+                                    offerMinQty = offerQty;
+
                             }
 
                             if (isPromotionApplicable)
                             {
-                                OrderItem lastItem = orderItem; 
+                                OrderItem lastItem = orderItem;
                                 // Mark all Items as OfferApplied
                                 foreach (var offerItem in promotion.OfferItems)
                                 {
                                     lastItem = FindById(offerItem.Id);
+
+                                    lastItem.OfferAmount = (lastItem.Quantity - offerMinQty) * lastItem.Price;
                                     lastItem.IsOfferApplied = true;
                                 }
 
-                                lastItem.OfferAmount = promotion.FixedPrice;
+                                lastItem.OfferAmount += offerMinQty * promotion.FixedPrice;
                             }
                         }
 
@@ -170,6 +179,30 @@ namespace promotionengine.Order
                 _ = ex;
             }
         }
+
+        private void ClearOldOfferAndTotals()
+        {
+            try
+            {
+                CartOfferTotal = 0;
+                CartTotal = 0;
+                if (IsCartEmpty())
+                    return;
+
+                foreach (var orderItem in Cart)
+                {
+                    orderItem.Amount = 0 ;
+                    orderItem.OfferAmount = 0;
+                    orderItem.IsOfferApplied = false;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                _ = ex;
+            }
+        }
+        
 
         public ICollection<OrderItem> GetCart()
         {

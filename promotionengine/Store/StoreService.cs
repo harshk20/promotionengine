@@ -61,6 +61,7 @@ namespace promotionengine.Store
         private bool AddToCart()
         {
             Console.WriteLine("\n'Esc' for MainMenu");
+            Console.WriteLine("'Any' for Input");
             Console.WriteLine("Item Quanity");
             while (Console.ReadKey(true).Key != ConsoleKey.Escape)
             {
@@ -81,6 +82,7 @@ namespace promotionengine.Store
         private bool NewSKU()
         {
             Console.WriteLine("\n'Esc' for MainMenu");
+            Console.WriteLine("'Any' for Input");
             Console.WriteLine("Item Price");
             while (Console.ReadKey(true).Key != ConsoleKey.Escape)
             {
@@ -246,8 +248,7 @@ namespace promotionengine.Store
                     Console.WriteLine("Items in your Cart  :");
                     foreach (var orderItem in this._orderService.GetCart())
                     {
-                        Console.WriteLine(orderItem.Id + " " + orderItem.Quantity + "   " +
-                                                          orderItem.Amount + "     " + orderItem.OfferAmount);
+                        Console.WriteLine(orderItem.Id + " " + orderItem.Quantity);
                     }
 
                     quit = MainMenu();

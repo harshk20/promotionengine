@@ -56,7 +56,7 @@ namespace promotionengine.Inventory
         public void GenerateDefaultSKU()
         {
 
-            CreateSKU("A", 40, "$");
+            CreateSKU("A", 50, "$");
             CreateSKU("B", 30, "$");
             CreateSKU("C", 20, "$");
             CreateSKU("D", 15, "$");

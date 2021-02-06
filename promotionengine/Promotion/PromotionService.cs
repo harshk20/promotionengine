@@ -38,11 +38,11 @@ namespace promotionengine.Promotion
 
         public void GenerateDefaultPromotion()
         {
-            CreatePromotion(OfferType.BUY_N_ITEMS_FOR_FIXED, new List<OfferItem> { new OfferItem("A", 3) }, 90);
-            CreatePromotion(OfferType.BUY_N_ITEMS_FOR_FIXED, new List<OfferItem> { new OfferItem("B", 2) }, 60);
+            CreatePromotion(OfferType.BUY_N_ITEMS_FOR_FIXED, new List<OfferItem> { new OfferItem("A", 3) }, 130);
+            CreatePromotion(OfferType.BUY_N_ITEMS_FOR_FIXED, new List<OfferItem> { new OfferItem("B", 2) }, 45);
             CreatePromotion(OfferType.BUY_COMBINED_ITEMS_FOR_FIXED,
                             new List<OfferItem> { new OfferItem("C", 1),
-                                                  new OfferItem("D", 1)}, 50);
+                                                  new OfferItem("D", 1)}, 30);
 
         }
 

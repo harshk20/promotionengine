@@ -34,7 +34,7 @@ namespace promotionengine.Store
             Console.WriteLine("Here is the list of Items that you can buy :");
             foreach (var item in this._inventoryService.GetStockItems())
             {
-                Console.Write(item.Id + "  " + item.Currency + item.Price + "  ");
+                Console.Write(item.Id + "-" + item.Currency + item.Price + "  ");
             }
 
             Console.WriteLine("\nHere are some offers going on :");

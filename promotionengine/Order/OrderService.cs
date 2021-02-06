@@ -147,7 +147,7 @@ namespace promotionengine.Order
                                 {
                                     lastItem = FindById(offerItem.Id);
 
-                                    lastItem.OfferAmount = (lastItem.Quantity - offerMinQty) * lastItem.Price;
+                                    lastItem.OfferAmount = (lastItem.Quantity - offerItem.MinQuantity*offerMinQty) * lastItem.Price;
                                     lastItem.IsOfferApplied = true;
                                 }
 

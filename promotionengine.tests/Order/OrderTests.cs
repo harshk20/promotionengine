@@ -96,6 +96,8 @@ namespace promotionengine.tests.Order
         [Theory]
         // Item1,UnitPrice1, CartQty1, Item2, UnitPrice2, CartQty2, promtionQty, PromotionFixedPrice, ExpectedTotal
         [InlineData("A", 10, 4, "B", 20, 2, 1, 25, 70)]
+        [InlineData("A", 10, 4, "B", 20, 1, 2, 25, 60)]
+        [InlineData("A", 10, 4, "B", 20, 5, 3, 25, 75)]
         public void CheckoutTotal_Test3(string id1, int price1, int qty1, string id2, int price2,  int qty2, int minPromoQty, int fixedPrice, int total)
         {
             this._inventoryService.CreateSKU(id1, price1, "$");

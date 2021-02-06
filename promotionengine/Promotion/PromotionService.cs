@@ -14,8 +14,6 @@ namespace promotionengine.Promotion
             this._promotions = new Collection<Promotion>();
         }
 
-        
-
         public ICollection<Promotion> Promotions { get { return this._promotions; } }
 
         public bool CreatePromotion(OfferType offerType, List<OfferItem> offerItems, int fixedPrice)

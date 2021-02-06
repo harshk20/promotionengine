@@ -179,8 +179,8 @@ namespace promotionengine.Store
             var total = this._orderService.Checkout();
             foreach (var orderItem in this._orderService.GetCart())
             {
-                Console.WriteLine(orderItem.Id + " " + orderItem.Quantity + "   " +
-                                  orderItem.Amount + "     " + orderItem.OfferAmount);
+                Console.WriteLine(orderItem.Id + " " + orderItem.Quantity + "*" + orderItem.Price + "  "
+                                  + orderItem.Amount + "     " + orderItem.OfferAmount);
             }
             Console.WriteLine("Total ---------------  " + total);
             return false;

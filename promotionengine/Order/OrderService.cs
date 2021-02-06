@@ -61,11 +61,15 @@ namespace promotionengine.Order
          */
         public int Checkout()
         {
+            // Clear out old calculated amounts and promotions per order item
             ClearOldOfferAndTotals();
-            ComputeAmountWithPromotion();
-            CalculateTotals();
 
-            return CartOfferTotal;
+            // Compute new amounts and promotions per order item
+            ComputeAmountWithPromotion();
+
+            // Calculate cart totals
+            return CalculateTotals();
+
         }
 
         // To check if the cart is empty or not
@@ -160,12 +164,12 @@ namespace promotionengine.Order
             }
         }
 
-        private void CalculateTotals()
+        private int CalculateTotals()
         {
             try
             {
                 if (IsCartEmpty())
-                    return;
+                    return 0;
 
                 foreach (var orderItem in Cart)
                 {
@@ -173,10 +177,13 @@ namespace promotionengine.Order
                     CartOfferTotal += (orderItem.IsOfferApplied == true)? orderItem.OfferAmount : orderItem.Amount;
                 }
 
+                return CartOfferTotal;
+
             }
             catch (Exception ex)
             {
                 _ = ex;
+                return 0;
             }
         }
 

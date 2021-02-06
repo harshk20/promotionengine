@@ -37,11 +37,11 @@ namespace promotionengine.Store
                 Console.Write(item.Id + "-" + item.Currency + item.Price + "  ");
             }
 
-            Console.WriteLine("\nHere are some offers going on :");
+            Console.WriteLine("\n\nHere are some offers going on :");
             foreach (var promo in this._promotionService.GetPromotionOffers())
             {
                 if (promo.OfferType == OfferType.BUY_N_ITEMS_FOR_FIXED)
-                    Console.WriteLine("Buy " + promo.OfferItems.First().MinQuantity + " " +
+                    Console.WriteLine("Buy " + promo.OfferItems.First().MinQuantity +
                                        promo.OfferItems.First().Id + " for fixed price of " +
                                        promo.FixedPrice);
                 else if (promo.OfferType == OfferType.BUY_COMBINED_ITEMS_FOR_FIXED)
@@ -175,11 +175,11 @@ namespace promotionengine.Store
         private bool Checkout()
         {
             Console.WriteLine("--------- Checkout -----------");
-            Console.WriteLine("ID Qty Amount OfferAmount");
+            Console.WriteLine("ID Qty UP Amount OfferAmount");
             var total = this._orderService.Checkout();
             foreach (var orderItem in this._orderService.GetCart())
             {
-                Console.WriteLine(orderItem.Id + " " + orderItem.Quantity + "*" + orderItem.Price + "  "
+                Console.WriteLine(orderItem.Id + " " + orderItem.Quantity + "   " + orderItem.Price + "   "
                                   + orderItem.Amount + "     " + orderItem.OfferAmount);
             }
             Console.WriteLine("Total ---------------  " + total);

@@ -30,4 +30,5 @@ No Database needs to be installed, all the data is in memory. [Data will be dest
 System supports only $ currency.
 System can be improved to support more promotionTypes A = A40% etc (will require small changes)
 System creates few SKUs and few Promotions of 2 types by default.
+More Test cases can be added for better/reliable system.
 

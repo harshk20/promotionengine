@@ -90,7 +90,7 @@ namespace promotionengine.Order
             }
         }
 
-        public void ComputeAmountWithPromotion()
+        private void ComputeAmountWithPromotion()
         {
             try
             {
@@ -151,7 +151,7 @@ namespace promotionengine.Order
             }
         }
 
-        public void CalculateTotals()
+        private void CalculateTotals()
         {
             try
             {
@@ -161,7 +161,7 @@ namespace promotionengine.Order
                 foreach (var orderItem in Cart)
                 {
                     CartTotal += orderItem.Amount;
-                    CartOfferTotal += (orderItem.OfferAmount > 0)? orderItem.OfferAmount : orderItem.Amount;
+                    CartOfferTotal += (orderItem.IsOfferApplied == true)? orderItem.OfferAmount : orderItem.Amount;
                 }
 
             }
@@ -174,6 +174,11 @@ namespace promotionengine.Order
         public ICollection<OrderItem> GetCart()
         {
             return this.Cart;
+        }
+
+        public void EmptyCart()
+        {
+            this._cart.Clear();
         }
 
         public ICollection<OrderItem> Cart { get { return this._cart; } }

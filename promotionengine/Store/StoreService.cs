@@ -98,21 +98,29 @@ namespace promotionengine.Store
             return false;
         }
 
+        private bool ClearCart()
+        {
+            this._orderService.EmptyCart();
+            return false;
+        }
+
+
         private bool NewPromotion()
         {
             Console.WriteLine("\n'Esc' for MainMenu");
-            Console.WriteLine("1. Buy 'n' Item for fixed price (N ITEM PRICE) ");
-            Console.WriteLine("2. Buy combined Items for fixed price (ITEM ITEM ITEM ... PRICE)");
+            Console.WriteLine("'1' for Buy 'n' Item for fixed price (N ITEM PRICE) ");
+            Console.WriteLine("'2' for Buy combined Items for fixed price (ITEM ITEM ITEM ... PRICE)");
             bool mainMenu = false;
             while (!mainMenu)
             {
-                var key = Console.ReadKey();
+                var key = Console.ReadKey(true);
                 if (key.Key == ConsoleKey.Escape)
                 {
                     mainMenu = true;
                 }
-                else if (key.Key == ConsoleKey.NumPad1)
+                else if (key.Key == ConsoleKey.D1)
                 {
+                    Console.WriteLine("N ITEM PRICE");
                     var line = Console.ReadLine();
                     var nItemPrice = line.Split(" ");
                     if (nItemPrice.Count() == 3)
@@ -131,8 +139,9 @@ namespace promotionengine.Store
 
                     }
                 }
-                else if (key.Key == ConsoleKey.NumPad2)
+                else if (key.Key == ConsoleKey.D2)
                 {
+                    Console.WriteLine("ITEM ITEM ITEM ... PRICE");
                     var linee = Console.ReadLine();
                     var itemItemPrice = linee.Split(" ");
                     if (itemItemPrice.Count() >= 3)
@@ -164,15 +173,15 @@ namespace promotionengine.Store
         private bool Checkout()
         {
             Console.WriteLine("--------- Checkout -----------");
-            Console.WriteLine("ID   Qty   Amount   OfferAmount");
+            Console.WriteLine("ID Qty Amount OfferAmount");
             var total = this._orderService.Checkout();
             foreach (var orderItem in this._orderService.GetCart())
             {
-                Console.WriteLine(orderItem.Id + " " + orderItem.Quantity + " " +
-                                  orderItem.Amount + " " + orderItem.OfferAmount);
+                Console.WriteLine(orderItem.Id + " " + orderItem.Quantity + "   " +
+                                  orderItem.Amount + "     " + orderItem.OfferAmount);
             }
             Console.WriteLine("Total ---------------  " + total);
-            return true;
+            return false;
         }
 
         private bool MainMenu()
@@ -183,6 +192,7 @@ namespace promotionengine.Store
             Console.WriteLine("'c' for CheckOut");
             Console.WriteLine("'n' for New SKU");
             Console.WriteLine("'p' for New Promotion");
+            Console.WriteLine("'r' for Clear Cart");
             Console.WriteLine("'q' for Quit");
 
             var consoleKey = Console.ReadKey();
@@ -196,7 +206,13 @@ namespace promotionengine.Store
             }
             else if (consoleKey.Key == ConsoleKey.C)
             {
-                return Checkout();
+                Checkout();
+                Console.ReadKey(true);
+                return false;
+            }
+            else if (consoleKey.Key == ConsoleKey.R)
+            {
+                return ClearCart();
             }
             else if (consoleKey.Key == ConsoleKey.N)
             {
@@ -230,7 +246,8 @@ namespace promotionengine.Store
                     Console.WriteLine("Items in your Cart  :");
                     foreach (var orderItem in this._orderService.GetCart())
                     {
-                        Console.WriteLine(orderItem.Id + " " + orderItem.Quantity);
+                        Console.WriteLine(orderItem.Id + " " + orderItem.Quantity + "   " +
+                                                          orderItem.Amount + "     " + orderItem.OfferAmount);
                     }
 
                     quit = MainMenu();
